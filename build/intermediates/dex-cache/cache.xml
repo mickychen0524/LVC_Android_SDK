@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/gun0912.ted/tedpermission/1.0.2/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="703c95818950344722c5d545e0763f4ae92625ce">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/classes-2ce07bc89a14da45eac0222ab5790ec725e9adb8.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="26674000177e45447a0326a6ad84612761199a13">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/classes-2330c9724dddef1ce1c4357228adc2352b77a543.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="4ccbcda5c72027c7f7c14be9ff8640d9cb0d8da0">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/classes-f5c11742897b660b03793383e7713442d0dd2eb5.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/11.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="21160c044ba984fb2e33b833c89a496becb85cfd">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/classes-a7fe16bb32af52de5c025fe19a6006ed7e3b0484.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/11.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="c147bfc12797852c00de33231b3d63b0b6f49375">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/classes-982afbbc8839a4bb745cc93377b9a23c31969e2b.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="d29714cc76b38157e3cbd034c66e1ec808eb4c19">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/classes-5f6c13fa2a27549461869fe648c8c77fb7cc2a04.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/11.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="d695dc4247690369d66c022c6d18190155c61fcd">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/classes-44fe9b400e339d2f1394bbd74284f9783e5442ba.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="f2e3b9bc1ec25f652e8007ce7774c991e38f6a00">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0-f6d46a19c1ff07fcb67e5d21a8ae963d113f9608.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="8bc45ce1f63d1a391fd38b32a201be5a42f9c95d">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/classes-825096697d4f93d2249edd8f9a0838bf67981e64.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="ee5faf4dee5b6a4364bf51587871047dde7c703a">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0-6f10d6c374bf4dfb6060b1be5a835341c2f33176.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/libs/libjingle_peerconnection.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="d4cceb6c86ecbeaee3cc84f83b82a6a7bfe8704c">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/libjingle_peerconnection-1a68b979821017a5eb4cd8d0acc0f05574ad032f.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="3b61a70884adaf0be3fc06c70c801e3e6df13133">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0-67397cd53947b61b53b4ecc49db0c77237b616fc.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.2.0/support-annotations-25.2.0.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/support-annotations-25.2.0-1b9f0eace6b781b2466aa5a9e195b6e38e594b7b.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/classes-afb728213eb5a6770092b72ed4d99de2e59af687.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="53a420cd4f49274db6bd43475f8006ba67ef6bbd">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/classes-25d820443617cb46ceb1813683b6e0cf1c21f563.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0-ff9473c77240affaa334fcb1d6a3bfbb54e30220.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="d29714cc76b38157e3cbd034c66e1ec808eb4c19">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/classes-20e8bc7c4ef404faa21c5868e02a473d5cf693f9.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/libs/libjingle_peerconnection.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="d4cceb6c86ecbeaee3cc84f83b82a6a7bfe8704c">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/libjingle_peerconnection-d8ed547fae4ea35d325269dc2416c11d44071a18.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/.gradle/caches/modules-2/files-2.1/com.squareup/otto/1.3.7/69d90fd7fb70e54746e26c10454c220e40a775ce/otto-1.3.7.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="69d90fd7fb70e54746e26c10454c220e40a775ce">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/otto-1.3.7-2814302d0fbf32ee647fc65b5b09a7d2bb459b26.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/classes-bd4fd347bcd7b8c2b4c5e4bd02cd36666989d93f.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/11.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="6178e31397c24ab1bfc09766832cdcf519621eb7">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/classes-14e3081ee894bc16e5d16be70b53c513401cbf7f.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/classes-55481ae58e0c7a9a677660a8a4a26bab29103e95.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/classes-0f91ad9046c479449dedc4b1a526b5ddb4baa927.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/classes-57362c544dd9e787d55e93a00049503903eb98de.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="53a420cd4f49274db6bd43475f8006ba67ef6bbd">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/classes-03f3a7db2dade23b70c0386578e2c59e6a99b53f.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="75b1f366ff0bbc78f8b1f7cf0dc82e7c53afef6a">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/classes-313661cc96acc72a6eee6e97cf4f868f3f7aa598.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/libs/autobanh.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="9b51fb848b29a3e41b8474ce2d4360f4d7d144c5">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/autobanh-1199e4db726e31e72375eacbfbf7c6a279b126a1.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="8bc45ce1f63d1a391fd38b32a201be5a42f9c95d">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/classes-14bce53c1d12336ce825cf36a52853862c11afd7.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/exploded-aar/gun0912.ted/tedpermission/1.0.2/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="703c95818950344722c5d545e0763f4ae92625ce">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/classes-dd2d6482c9b9ac0980a15f185285af7ca475f385.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.2.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK copy 2/app/build/intermediates/pre-dexed/debug/classes-086e880e3481aeadfe21b93c735b3bba683a1c51.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.0/jars/libs/internal_impl-25.0.0.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="665d21a8a069c96b4d9e8b434f5096d865b4e261">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/internal_impl-25.0.0-927e88ef87601064faa3b6e52ba68c4cc1c1bd45.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="76fb65a4b41ea42dab8a1310ed772a2420c96b52">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/classes-77f8d56c30d99e26696c63b0ea061f11640ff852.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/libs/autobanh.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="9b51fb848b29a3e41b8474ce2d4360f4d7d144c5">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/autobanh-13381fbceec54e7f7c44daa350bd471e82c3fdf3.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/classes-bb34007ee193cb397ceaecc6f07de6f04def6e84.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="07daa0b6e1d455c82a38422ffe287c18823d339a">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/classes-81e6a1ff18f2f20d1d10c9f9fe115c01c49c758b.jar" />
+    </item>
+    <item
+        jar="/Users/swayamagrawal/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.0.0/support-annotations-25.0.0.jar"
+        jumboMode="false"
+        revision="25.0.3"
+        sha1="a22d2cc94da87b254451fa8ed28afc30b4653773">
+        <dex dex="/Users/swayamagrawal/Desktop/Android App/ChatSDK/app/build/intermediates/pre-dexed/debug/support-annotations-25.0.0-a8d291e32444255f48d348e20071074b626bf9b8.jar" />
+    </item>
+
+</items>
