@@ -2,12 +2,14 @@ package project.labs.avviotech.com.chatsdk;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
-
 
 
 import org.webrtc.RendererCommon;
@@ -31,7 +33,7 @@ public class CallActivity extends AppCompatActivity {
     private static final String SERVER_IP = "server ip";
     private static final String IS_SERVER = "is_server";
     private ImageButton audio,video,end;
-
+    private final int RECORD_AUDIO = 101;
     // layouts
     private SurfaceViewRenderer remoteRenderer;
     private SurfaceViewRenderer localRenderer;
@@ -68,21 +70,20 @@ public class CallActivity extends AppCompatActivity {
         localRenderer.setZOrderOnTop(true);
         updateVideoView();
 
-        Intent intent = getIntent();
-        String ip = intent.getStringExtra(SERVER_IP);
-        boolean isServer = intent.getBooleanExtra(IS_SERVER, false);
-        if (isServer) {
-            client = new Client(CallActivity.this, intent, "0.0.0.0", remoteRenderer, localRenderer);
-        } else {
-            client = new Client(CallActivity.this, intent, ip, remoteRenderer, localRenderer);
+        int permissionCheck = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECORD_AUDIO);
+
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.RECORD_AUDIO},
+                    RECORD_AUDIO);
         }
 
-        executor.schedule(new Runnable() {
-            @Override
-            public void run() {
-                client.connect();
-            }
-        }, 1, TimeUnit.SECONDS);
+
+
     }
 
     @Override
@@ -163,5 +164,43 @@ public class CallActivity extends AppCompatActivity {
                     client.onCameraSwitch();
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case RECORD_AUDIO: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    Intent intent = getIntent();
+                    String ip = intent.getStringExtra(SERVER_IP);
+                    boolean isServer = intent.getBooleanExtra(IS_SERVER, false);
+                    if (isServer) {
+                        client = new Client(CallActivity.this, intent, "0.0.0.0", remoteRenderer, localRenderer);
+                    } else {
+                        client = new Client(CallActivity.this, intent, ip, remoteRenderer, localRenderer);
+                    }
+
+                    executor.schedule(new Runnable() {
+                        @Override
+                        public void run() {
+                            client.connect();
+                        }
+                    }, 1, TimeUnit.SECONDS);
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
 }
