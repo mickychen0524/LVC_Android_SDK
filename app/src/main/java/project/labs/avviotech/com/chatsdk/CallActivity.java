@@ -8,8 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.TedPermission;
+
 
 import org.webrtc.RendererCommon;
 import org.webrtc.SurfaceViewRenderer;
@@ -69,44 +68,21 @@ public class CallActivity extends AppCompatActivity {
         localRenderer.setZOrderOnTop(true);
         updateVideoView();
 
-        // Permission
-        TedPermission permissionChecker = new TedPermission(this);
-        permissionChecker.setPermissionListener(new PermissionListener() {
-            @Override
-            public void onPermissionGranted() {
-                Intent intent = getIntent();
-                String ip = intent.getStringExtra(SERVER_IP);
-                boolean isServer = intent.getBooleanExtra(IS_SERVER, false);
-                if (isServer) {
-                    client = new Client(CallActivity.this, intent, "0.0.0.0", remoteRenderer, localRenderer);
-                } else {
-                    client = new Client(CallActivity.this, intent, ip, remoteRenderer, localRenderer);
-                }
+        Intent intent = getIntent();
+        String ip = intent.getStringExtra(SERVER_IP);
+        boolean isServer = intent.getBooleanExtra(IS_SERVER, false);
+        if (isServer) {
+            client = new Client(CallActivity.this, intent, "0.0.0.0", remoteRenderer, localRenderer);
+        } else {
+            client = new Client(CallActivity.this, intent, ip, remoteRenderer, localRenderer);
+        }
 
-                executor.schedule(new Runnable() {
-                    @Override
-                    public void run() {
-                        client.connect();
-                    }
-                }, 1, TimeUnit.SECONDS);
-            }
-
+        executor.schedule(new Runnable() {
             @Override
-            public void onPermissionDenied(ArrayList<String> deniedPermissions) {
-                finish();
+            public void run() {
+                client.connect();
             }
-        });
-        permissionChecker.setPermissions(Manifest.permission.ACCESS_WIFI_STATE,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.CAMERA,
-                Manifest.permission.CHANGE_NETWORK_STATE,
-                Manifest.permission.MODIFY_AUDIO_SETTINGS,
-                Manifest.permission.RECORD_AUDIO,
-                Manifest.permission.INTERNET,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.ACCESS_NETWORK_STATE,
-                Manifest.permission.CHANGE_WIFI_STATE);
-        permissionChecker.check();
+        }, 1, TimeUnit.SECONDS);
     }
 
     @Override

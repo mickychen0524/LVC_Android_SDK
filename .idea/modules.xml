@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ChatSDK copy 2.iml" filepath="$PROJECT_DIR$/ChatSDK copy 2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LVC_Android_SDK.iml" filepath="$PROJECT_DIR$/LVC_Android_SDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app-debug/app-debug.iml" filepath="$PROJECT_DIR$/app-debug/app-debug.iml" />
     </modules>
