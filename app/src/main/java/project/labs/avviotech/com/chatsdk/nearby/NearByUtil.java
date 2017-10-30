@@ -3,6 +3,7 @@ package project.labs.avviotech.com.chatsdk.nearby;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -195,6 +196,7 @@ public class NearByUtil implements
                                     Log.i("NearBy","Device Discovery Successful  - " + status.getStatusMessage());
                                 } else {
                                     // We were unable to start discovering.
+                                    Log.i("NearBy","Device Discovery Failed  - " + status.getStatusMessage());
                                 }
                             }
                         });
@@ -258,8 +260,18 @@ public class NearByUtil implements
                     {
                         //try
                         //{Thread.sleep(200);}catch (Exception e){e.printStackTrace();}
-                        Nearby.Connections.acceptConnection(
-                                mGoogleApiClient, endpointId, mPayloadCallback);
+
+                        new CountDownTimer(100, 1000) { //40000 milli seconds is total time, 1000 milli seconds is time interval
+
+                            public void onTick(long millisUntilFinished) {
+                            }
+                            public void onFinish() {
+                                Nearby.Connections.acceptConnection(
+                                        mGoogleApiClient, endpointId, mPayloadCallback);
+                            }
+                        }.start();
+
+
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {

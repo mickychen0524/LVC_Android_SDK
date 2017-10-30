@@ -54,16 +54,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NearByUtil.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NearByUtil.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/project/labs/avviotech/com/chatsdk/nearby/NearByUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="261" column="80" selection-start-line="261" selection-start-column="80" selection-end-line="261" selection-end-column="80" />
+            <state relative-caret-position="488">
+              <caret line="347" column="61" selection-start-line="347" selection-start-column="53" selection-end-line="347" selection-end-column="61" />
               <folding>
-                <element signature="e#7930#8427#0" expanded="true" />
-                <element signature="e#8426#8427#0" expanded="true" />
-                <element signature="e#9814#10042#0" expanded="true" />
-                <element signature="e#10041#10042#0" expanded="true" />
+                <element signature="e#8075#8572#0" expanded="true" />
+                <element signature="e#8571#8572#0" expanded="true" />
+                <element signature="e#10331#10559#0" expanded="true" />
+                <element signature="e#10558#10559#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -89,7 +89,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Client.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Client.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/project/labs/avviotech/com/chatsdk/net/client/Client.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="80">
@@ -1661,8 +1661,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/project/labs/avviotech/com/chatsdk/ChatApplication.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/project/labs/avviotech/com/chatsdk/nearby/NearByUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/project/labs/avviotech/com/chatsdk/CallActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/project/labs/avviotech/com/chatsdk/nearby/NearByUtil.java" />
       </list>
     </option>
   </component>
@@ -2502,7 +2502,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="100" y="123" width="1240" height="603" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.55007255" sideWeight="0.49713877" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55007255" sideWeight="0.49713877" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2538,7 +2538,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5327511" sideWeight="0.49713877" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.55007255" sideWeight="0.49713877" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2547,7 +2547,7 @@
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24092889" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24092889" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2647,10 +2647,10 @@
         <state relative-caret-position="0">
           <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
           <folding>
-            <element signature="e#7930#8427#0" expanded="true" />
-            <element signature="e#8426#8427#0" expanded="true" />
-            <element signature="e#9814#10042#0" expanded="true" />
-            <element signature="e#10041#10042#0" expanded="true" />
+            <element signature="e#8075#8572#0" expanded="true" />
+            <element signature="e#8571#8572#0" expanded="true" />
+            <element signature="e#10331#10559#0" expanded="true" />
+            <element signature="e#10558#10559#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2727,10 +2727,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#7930#8427#0" expanded="true" />
-            <element signature="e#8426#8427#0" expanded="true" />
-            <element signature="e#9814#10042#0" expanded="true" />
-            <element signature="e#10041#10042#0" expanded="true" />
+            <element signature="e#8075#8572#0" expanded="true" />
+            <element signature="e#8571#8572#0" expanded="true" />
+            <element signature="e#10331#10559#0" expanded="true" />
+            <element signature="e#10558#10559#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2778,10 +2778,10 @@
         <state relative-caret-position="0">
           <caret line="50" column="43" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="43" />
           <folding>
-            <element signature="e#7930#8427#0" expanded="true" />
-            <element signature="e#8426#8427#0" expanded="true" />
-            <element signature="e#9814#10042#0" expanded="true" />
-            <element signature="e#10041#10042#0" expanded="true" />
+            <element signature="e#8075#8572#0" expanded="true" />
+            <element signature="e#8571#8572#0" expanded="true" />
+            <element signature="e#10331#10559#0" expanded="true" />
+            <element signature="e#10558#10559#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2934,32 +2934,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/11.0.1/jars/classes.jar!/com/google/android/gms/nearby/connection/Connections.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-26/android/os/Handler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="116">
           <caret line="425" column="25" selection-start-line="425" selection-start-column="25" selection-end-line="425" selection-end-column="25" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/project/labs/avviotech/com/chatsdk/nearby/NearByUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="261" column="80" selection-start-line="261" selection-start-column="80" selection-end-line="261" selection-end-column="80" />
-          <folding>
-            <element signature="e#7930#8427#0" expanded="true" />
-            <element signature="e#8426#8427#0" expanded="true" />
-            <element signature="e#9814#10042#0" expanded="true" />
-            <element signature="e#10041#10042#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2976,6 +2955,27 @@
         <state relative-caret-position="80">
           <caret line="115" column="16" selection-start-line="115" selection-start-column="16" selection-end-line="115" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/11.0.1/jars/classes.jar!/com/google/android/gms/nearby/connection/Connections.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="81" column="9" selection-start-line="81" selection-start-column="9" selection-end-line="81" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/project/labs/avviotech/com/chatsdk/nearby/NearByUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="347" column="61" selection-start-line="347" selection-start-column="53" selection-end-line="347" selection-end-column="61" />
+          <folding>
+            <element signature="e#8075#8572#0" expanded="true" />
+            <element signature="e#8571#8572#0" expanded="true" />
+            <element signature="e#10331#10559#0" expanded="true" />
+            <element signature="e#10558#10559#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
