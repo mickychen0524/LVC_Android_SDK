@@ -128,29 +128,35 @@ public class NearByUtil implements
 
     public static void startAdvertising()
     {
-        Nearby.Connections.startAdvertising(
-                mGoogleApiClient,
-                name,
-                SERVICE_ID,
-                mConnectionLifecycleCallback,
-                new AdvertisingOptions(Strategy.P2P_CLUSTER))
-                .setResultCallback(
-                        new ResultCallback<Connections.StartAdvertisingResult>() {
-                            @Override
-                            public void onResult(@NonNull Connections.StartAdvertisingResult result) {
-                                if (result.getStatus().isSuccess()) {
-                                    Log.i("NearBy", "Device Advertising Successful  - " + result.getLocalEndpointName());
-                                } else {
-                                    // We were unable to start advertising.
+        if(mGoogleApiClient.isConnected())
+        {
+            Nearby.Connections.startAdvertising(
+                    mGoogleApiClient,
+                    name,
+                    SERVICE_ID,
+                    mConnectionLifecycleCallback,
+                    new AdvertisingOptions(Strategy.P2P_CLUSTER))
+                    .setResultCallback(
+                            new ResultCallback<Connections.StartAdvertisingResult>() {
+                                @Override
+                                public void onResult(@NonNull Connections.StartAdvertisingResult result) {
+                                    if (result.getStatus().isSuccess()) {
+                                        Log.i("NearBy", "Device Advertising Successful  - " + result.getLocalEndpointName());
+                                    } else {
+                                        // We were unable to start advertising.
+                                    }
                                 }
-                            }
-                        });
+                            });
+        }
+
     }
 
     public static void stopAdvertising()
     {
-        Nearby.Connections.stopAdvertising(
-                mGoogleApiClient);
+        if(mGoogleApiClient.isConnected()) {
+            Nearby.Connections.stopAdvertising(
+                    mGoogleApiClient);
+        }
     }
 
     private final EndpointDiscoveryCallback mEndpointDiscoveryCallback =
@@ -183,23 +189,27 @@ public class NearByUtil implements
             };
 
     public void startDiscovery() {
-        Nearby.Connections.startDiscovery(
-                mGoogleApiClient,
-                SERVICE_ID,
-                mEndpointDiscoveryCallback,
-                new DiscoveryOptions(Strategy.P2P_CLUSTER))
-                .setResultCallback(
-                        new ResultCallback<Status>() {
-                            @Override
-                            public void onResult(@NonNull Status status) {
-                                if (status.isSuccess()) {
-                                    Log.i("NearBy","Device Discovery Successful  - " + status.getStatusMessage());
-                                } else {
-                                    // We were unable to start discovering.
-                                    Log.i("NearBy","Device Discovery Failed  - " + status.getStatusMessage());
+        if(mGoogleApiClient.isConnected())
+        {
+            Nearby.Connections.startDiscovery(
+                    mGoogleApiClient,
+                    SERVICE_ID,
+                    mEndpointDiscoveryCallback,
+                    new DiscoveryOptions(Strategy.P2P_CLUSTER))
+                    .setResultCallback(
+                            new ResultCallback<Status>() {
+                                @Override
+                                public void onResult(@NonNull Status status) {
+                                    if (status.isSuccess()) {
+                                        Log.i("NearBy","Device Discovery Successful  - " + status.getStatusMessage());
+                                    } else {
+                                        // We were unable to start discovering.
+                                        Log.i("NearBy","Device Discovery Failed  - " + status.getStatusMessage());
+                                    }
                                 }
-                            }
-                        });
+                            });
+        }
+
     }
 
     public void connect(

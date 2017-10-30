@@ -81,6 +81,25 @@ public class CallActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.RECORD_AUDIO},
                     RECORD_AUDIO);
         }
+        else
+        {
+            Intent intent = getIntent();
+            String ip = intent.getStringExtra(SERVER_IP);
+            boolean isServer = intent.getBooleanExtra(IS_SERVER, false);
+            if (isServer) {
+                client = new Client(CallActivity.this, intent, "0.0.0.0", remoteRenderer, localRenderer);
+            } else {
+                client = new Client(CallActivity.this, intent, ip, remoteRenderer, localRenderer);
+            }
+
+            executor.schedule(new Runnable() {
+                @Override
+                public void run() {
+                    client.connect();
+                }
+            }, 1, TimeUnit.SECONDS);
+
+        }
 
 
 
