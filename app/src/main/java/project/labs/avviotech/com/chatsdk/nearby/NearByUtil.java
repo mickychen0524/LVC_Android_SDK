@@ -329,7 +329,8 @@ public class NearByUtil implements
     public void onConnected(Bundle bundle) {
         Log.i("ChatSDK","google app client started");
         Nearby.Connections.stopAllEndpoints(mGoogleApiClient);
-        startDiscovery();
+        if("clerk".equalsIgnoreCase(type) || "client".equalsIgnoreCase(type))
+            startDiscovery();
         if("clerk".equalsIgnoreCase(type))
             startAdvertising();
 
