@@ -110,7 +110,10 @@ public class CallActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        client.disconnect();
+        if(client != null) {
+            client.disconnect();
+        }
+
         if (localRenderer != null) {
             localRenderer.release();
             localRenderer = null;

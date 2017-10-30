@@ -251,11 +251,24 @@ public class NearByUtil implements
 
                 @Override
                 public void onConnectionInitiated(
-                        String endpointId, ConnectionInfo connectionInfo) {
+                        final String endpointId, ConnectionInfo connectionInfo) {
                     // Automatically accept the connection on both sides.
-                    Log.i("NearBy", "onConnectionInitiated");
-                    Nearby.Connections.acceptConnection(
-                            mGoogleApiClient, endpointId, mPayloadCallback);
+
+                    if(true)
+                    {
+                        //try
+                        //{Thread.sleep(200);}catch (Exception e){e.printStackTrace();}
+                        Nearby.Connections.acceptConnection(
+                                mGoogleApiClient, endpointId, mPayloadCallback);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.i("ChatSDK","Accept Condition");
+
+                            }
+                        },80);
+
+                    }
                 }
 
                 @Override
@@ -264,10 +277,15 @@ public class NearByUtil implements
                         case ConnectionsStatusCodes.STATUS_OK:
                             // We're connected! Can now start sending and receiving data.
                             Log.i("NearBy", "Connected");
-                            Payload p = Payload.fromBytes(Util.getIPAddress(true).getBytes());
-                            Nearby.Connections.sendPayload(mGoogleApiClient, endpointId, p);
                             if(isGroupOwner)
-                                startCall();
+                            {
+                                Payload p = Payload.fromBytes(Util.getIPAddress(true).getBytes());
+                                Nearby.Connections.sendPayload(mGoogleApiClient, endpointId, p);
+                                Log.i("ChatSDK","Sending Payload with ip address to client from " + type);
+                                if(isGroupOwner)
+                                    startCall();
+                            }
+
                             break;
                         case ConnectionsStatusCodes.STATUS_CONNECTION_REJECTED:
                             // The connection was rejected by one or both sides.
