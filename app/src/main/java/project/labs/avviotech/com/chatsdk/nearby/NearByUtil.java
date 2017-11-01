@@ -2,6 +2,7 @@ package project.labs.avviotech.com.chatsdk.nearby;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -40,6 +41,7 @@ import java.util.List;
 
 import project.labs.avviotech.com.chatsdk.CallActivity;
 import project.labs.avviotech.com.chatsdk.ChatApplication;
+import project.labs.avviotech.com.chatsdk.R;
 import project.labs.avviotech.com.chatsdk.net.model.DeviceModel;
 import project.labs.avviotech.com.chatsdk.net.protocol.NearByProtocol;
 import project.labs.avviotech.com.chatsdk.net.protocol.WiFiP2PProtocol;
@@ -53,6 +55,7 @@ public class NearByUtil implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener{
 
+    private static MediaPlayer mediaPlayer;
     private static NearByUtil instance;
     private static GoogleApiClient mGoogleApiClient;
     private static String SERVICE_ID = "project.labs.avviotech.com.chatsdk";
@@ -344,6 +347,7 @@ public class NearByUtil implements
         Log.i("ChatSDK", "is owner - " + isGroupOwner);
         if(isGroupOwner)
         {
+            stopSound();
             Intent launchServer = new Intent(activity, CallActivity.class);
             launchServer.putExtra(SERVER_IP, ip);
             launchServer.putExtra(IS_SERVER, true);
@@ -351,6 +355,7 @@ public class NearByUtil implements
             activity.startActivity(launchServer);
         }else
         {
+            stopSound();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -408,6 +413,26 @@ public class NearByUtil implements
             return n.substring(n.indexOf("-") + 1);
 
         return "";
+    }
+
+    public static void playSound()
+    {
+        if(mediaPlayer == null)
+        {
+            mediaPlayer = MediaPlayer.create(activity, R.raw.ringtone);
+            mediaPlayer.setLooping(true);
+        }
+
+        mediaPlayer.start();
+    }
+    public static void stopSound()
+    {
+        if(mediaPlayer != null && mediaPlayer.isPlaying())
+        {
+            mediaPlayer.stop();
+        }
+
+
     }
 
 
