@@ -127,6 +127,7 @@ public class NearByUtil implements
     public static void stop()
     {
         mGoogleApiClient.disconnect();
+
     }
 
     public static void startAdvertising()
@@ -187,7 +188,20 @@ public class NearByUtil implements
 
                 @Override
                 public void onEndpointLost(String endpointId) {
-                    // A previously discovered endpoint has gone away.
+                    if(peerList.get(endpointId) != null)
+                    {
+                        DeviceModel m = peerList.get(endpointId);
+                        if(m.getType().equalsIgnoreCase("clerk"))
+                            clerkList.remove(endpointId);
+                        if(m.getType().equalsIgnoreCase("client"))
+                            clientList.remove(endpointId);
+
+                        peerList.remove(endpointId);
+
+                        delegate.onPeersFound(peerList);
+                    }
+
+
                 }
             };
 
@@ -374,6 +388,7 @@ public class NearByUtil implements
     public void onConnected(Bundle bundle) {
         Log.i("ChatSDK","google app client started");
         Nearby.Connections.stopAllEndpoints(mGoogleApiClient);
+
         if("clerk".equalsIgnoreCase(type) || "client".equalsIgnoreCase(type))
             startDiscovery();
         if("clerk".equalsIgnoreCase(type))
