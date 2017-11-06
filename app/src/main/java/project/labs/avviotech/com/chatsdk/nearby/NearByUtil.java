@@ -430,6 +430,7 @@ public class NearByUtil implements
 
     public static void disconnect()
     {
+        Nearby.Connections.stopAllEndpoints(mGoogleApiClient);
         if("client".equalsIgnoreCase(type))
             stopAdvertising();
 
@@ -465,47 +466,6 @@ public class NearByUtil implements
     }
 
 
-
-    private static void publish(String message) {
-        Log.i(TAG, "Publishing message: " + message);
-        mActiveMessage = new Message(message.getBytes());
-        Nearby.Messages.publish(mGoogleApiClient, mActiveMessage);
-    }
-
-    private static void unpublish() {
-        Log.i(TAG, "Unpublishing.");
-        if (mActiveMessage != null) {
-            Nearby.Messages.unpublish(mGoogleApiClient, mActiveMessage);
-            mActiveMessage = null;
-        }
-    }
-
-    private static void subscribe() {
-        Log.i(TAG, "Subscribing.");
-        SubscribeOptions options = new SubscribeOptions.Builder()
-               .build();
-
-        Nearby.Messages.subscribe(mGoogleApiClient, mMessageListener, options);
-    }
-
-    private static void unsubscribe() {
-        Log.i(TAG, "Unsubscribing.");
-        Nearby.Messages.unsubscribe(mGoogleApiClient, mMessageListener);
-    }
-
-    private static MessageListener mMessageListener = new MessageListener() {
-        @Override
-        public void onFound(Message message) {
-            String messageAsString = new String(message.getContent());
-            Log.d(TAG, "Found message: " + messageAsString);
-        }
-
-        @Override
-        public void onLost(Message message) {
-            String messageAsString = new String(message.getContent());
-            Log.d(TAG, "Lost sight of message: " + messageAsString);
-        }
-    };
 
 
 }
