@@ -54,7 +54,7 @@ public class TCPClientSocket extends TCPSocket {
 
     @Override
     public void send(String message) {
-        Log.i("ChatSDK","Sending Meesage - " + message);
+        Log.i("ChatSDK","Sending Meesage" + message);
         synchronized (rawSocketLock) {
             if (out == null) {
                 channelEvent.onError("Sending data on closed socket.");
