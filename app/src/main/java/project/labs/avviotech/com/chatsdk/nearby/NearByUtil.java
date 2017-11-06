@@ -72,9 +72,9 @@ public class NearByUtil implements
     private static final String IS_SERVER = "is_server";
     private static String serverIp = "";
 
-    private HashMap<String,DeviceModel> clerkList;
-    private HashMap<String,DeviceModel> clientList;
-    private HashMap<String,DeviceModel> peerList;
+    private static HashMap<String,DeviceModel> clerkList;
+    private static HashMap<String,DeviceModel> clientList;
+    private static HashMap<String,DeviceModel> peerList;
     private static boolean isGroupOwner = false;
     public  static NearByProtocol.DiscoveryProtocol delegate;
     public HashMap<String,DeviceModel> getClientList()
@@ -183,7 +183,7 @@ public class NearByUtil implements
         }
     }
 
-    private final EndpointDiscoveryCallback mEndpointDiscoveryCallback =
+    private static final EndpointDiscoveryCallback mEndpointDiscoveryCallback =
             new EndpointDiscoveryCallback() {
                 @Override
                 public void onEndpointFound(
@@ -215,7 +215,7 @@ public class NearByUtil implements
                 }
             };
 
-    public void startDiscovery() {
+    public static void startDiscovery() {
         if(mGoogleApiClient.isConnected())
         {
             Nearby.Connections.startDiscovery(
@@ -420,7 +420,7 @@ public class NearByUtil implements
         Log.i("ChatSDK","Google Client onConnectionFailed");
     }
 
-    public boolean isClient(String name)
+    public static boolean isClient(String name)
     {
         if(name.indexOf("client") != -1)
             return true;
@@ -431,13 +431,18 @@ public class NearByUtil implements
     public static void disconnect()
     {
         Nearby.Connections.stopAllEndpoints(mGoogleApiClient);
-        if("client".equalsIgnoreCase(type))
+        startDiscovery();
+        if("client".equalsIgnoreCase(type)){
             stopAdvertising();
+        }
+        else if("clerk".equalsIgnoreCase(type)){
+            startAdvertising();
+        }
 
         delegate.onDisconnect();
     }
 
-    public String getFilterName(String n)
+    public static String getFilterName(String n)
     {
         if(n.indexOf("-") != -1)
             return n.substring(n.indexOf("-") + 1);
