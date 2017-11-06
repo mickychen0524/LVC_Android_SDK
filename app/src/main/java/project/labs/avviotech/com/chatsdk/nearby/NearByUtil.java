@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -14,6 +15,7 @@ import android.widget.SimpleAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.nearby.Nearby;
 import com.google.android.gms.nearby.connection.AdvertisingOptions;
@@ -31,6 +33,10 @@ import com.google.android.gms.nearby.connection.Payload;
 import com.google.android.gms.nearby.connection.PayloadCallback;
 import com.google.android.gms.nearby.connection.PayloadTransferUpdate;
 import com.google.android.gms.nearby.connection.Strategy;
+import com.google.android.gms.nearby.messages.Message;
+import com.google.android.gms.nearby.messages.MessageListener;
+import com.google.android.gms.nearby.messages.SubscribeCallback;
+import com.google.android.gms.nearby.messages.SubscribeOptions;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -53,12 +59,12 @@ import project.labs.avviotech.com.chatsdk.wifidirect.WifiDirect;
  */
 public class NearByUtil implements
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener{
-
+        GoogleApiClient.OnConnectionFailedListener
+    {
     private static MediaPlayer mediaPlayer;
     private static NearByUtil instance;
     private static GoogleApiClient mGoogleApiClient;
-    private static String SERVICE_ID = "project.labs.avviotech.com.chatsdk";
+    private static String SERVICE_ID = "project.labs.avviotech.com.chatsdk.new";
     private static String CLIENT_SERVICE_ID = "project.labs.avviotech.com.chatsdk.client";
     private static String CLERK_SERVICE_ID = "project.labs.avviotech.com.chatsdk.clerk";
     private static String name="";
@@ -85,6 +91,8 @@ public class NearByUtil implements
     }
     private static String type;
     private static Activity activity;
+    private static Message mActiveMessage;
+
     public static NearByUtil getInstance()
     {
         if(instance == null)
@@ -93,21 +101,21 @@ public class NearByUtil implements
         return  instance;
     }
 
+    private static String TAG = "NearBy";
     public static void setActivity(Activity a)
     {
         activity = a;
     }
 
-    public void init(Activity activity,String n, String t)
+    public void init(AppCompatActivity activity, String n, String t)
     {
         name = n;
         type = t;
-        //ChatApplication.activity = activity;
         name = type + "-" + name;
         mGoogleApiClient = new GoogleApiClient.Builder(activity)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
                 .addApi(Nearby.CONNECTIONS_API)
+                .addConnectionCallbacks(this)
+                .enableAutoManage(activity,this)
                 .build();
 
         clerkList = new HashMap<>();
@@ -126,6 +134,9 @@ public class NearByUtil implements
 
     public static void stop()
     {
+        Log.i("ChatSDK","Google client Stopped");
+        //unpublish();
+        //unsubscribe();
         mGoogleApiClient.disconnect();
 
     }
@@ -139,7 +150,7 @@ public class NearByUtil implements
                     name,
                     SERVICE_ID,
                     mConnectionLifecycleCallback,
-                    new AdvertisingOptions(Strategy.P2P_CLUSTER))
+                    new AdvertisingOptions(Strategy.P2P_STAR))
                     .setResultCallback(
                             new ResultCallback<Connections.StartAdvertisingResult>() {
                                 @Override
@@ -147,7 +158,7 @@ public class NearByUtil implements
                                     if (result.getStatus().isSuccess()) {
                                         Log.i("NearBy", "Device Advertising Successful  - " + result.getLocalEndpointName());
                                     } else {
-                                        // We were unable to start advertising.
+                                        Log.i("NearBy", "Device Advertising failed ");
                                     }
                                 }
                             });
@@ -158,7 +169,16 @@ public class NearByUtil implements
     public static void stopAdvertising()
     {
         if(mGoogleApiClient.isConnected()) {
+            Log.i("ChatSDK","Advertising Stopped");
             Nearby.Connections.stopAdvertising(
+                    mGoogleApiClient);
+        }
+    }
+    public static void stopDiscovery()
+    {
+        if(mGoogleApiClient.isConnected()) {
+            Log.i("ChatSDK","Discovery Stopped");
+            Nearby.Connections.stopDiscovery(
                     mGoogleApiClient);
         }
     }
@@ -182,26 +202,16 @@ public class NearByUtil implements
 
                     delegate.onPeersFound(peerList);
 
-
-
                 }
 
                 @Override
                 public void onEndpointLost(String endpointId) {
-                    if(peerList.get(endpointId) != null)
-                    {
-                        DeviceModel m = peerList.get(endpointId);
-                        if(m.getType().equalsIgnoreCase("clerk"))
-                            clerkList.remove(endpointId);
-                        if(m.getType().equalsIgnoreCase("client"))
-                            clientList.remove(endpointId);
+                    Log.i("NearBy", "onEndpointLost- " + endpointId);
+                    clerkList.remove(endpointId);
+                    clientList.remove(endpointId);
+                    peerList.remove(endpointId);
 
-                        peerList.remove(endpointId);
-
-                        delegate.onPeersFound(peerList);
-                    }
-
-
+                    delegate.onPeersFound(peerList);
                 }
             };
 
@@ -212,7 +222,7 @@ public class NearByUtil implements
                     mGoogleApiClient,
                     SERVICE_ID,
                     mEndpointDiscoveryCallback,
-                    new DiscoveryOptions(Strategy.P2P_CLUSTER))
+                    new DiscoveryOptions(Strategy.P2P_STAR))
                     .setResultCallback(
                             new ResultCallback<Status>() {
                                 @Override
@@ -245,7 +255,7 @@ public class NearByUtil implements
                                 if (status.isSuccess()) {
                                     Log.i("NearBy","requestConnection");
                                 } else {
-                                    // Nearby Connections failed to request the connection.
+                                    Log.i("NearBy","requestConnection failed");
                                 }
                             }
                         });
@@ -388,22 +398,26 @@ public class NearByUtil implements
     public void onConnected(Bundle bundle) {
         Log.i("ChatSDK","google app client started");
         Nearby.Connections.stopAllEndpoints(mGoogleApiClient);
-
-        if("clerk".equalsIgnoreCase(type) || "client".equalsIgnoreCase(type))
-            startDiscovery();
+        startDiscovery();
         if("clerk".equalsIgnoreCase(type))
+        {
             startAdvertising();
+        }
+
+        //publish(name);
+        //subscribe();
+
 
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-
+        Log.i("ChatSDK","Google Client onConnectionSuspended");
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-
+        Log.i("ChatSDK","Google Client onConnectionFailed");
     }
 
     public boolean isClient(String name)
@@ -449,6 +463,49 @@ public class NearByUtil implements
 
 
     }
+
+
+
+    private static void publish(String message) {
+        Log.i(TAG, "Publishing message: " + message);
+        mActiveMessage = new Message(message.getBytes());
+        Nearby.Messages.publish(mGoogleApiClient, mActiveMessage);
+    }
+
+    private static void unpublish() {
+        Log.i(TAG, "Unpublishing.");
+        if (mActiveMessage != null) {
+            Nearby.Messages.unpublish(mGoogleApiClient, mActiveMessage);
+            mActiveMessage = null;
+        }
+    }
+
+    private static void subscribe() {
+        Log.i(TAG, "Subscribing.");
+        SubscribeOptions options = new SubscribeOptions.Builder()
+               .build();
+
+        Nearby.Messages.subscribe(mGoogleApiClient, mMessageListener, options);
+    }
+
+    private static void unsubscribe() {
+        Log.i(TAG, "Unsubscribing.");
+        Nearby.Messages.unsubscribe(mGoogleApiClient, mMessageListener);
+    }
+
+    private static MessageListener mMessageListener = new MessageListener() {
+        @Override
+        public void onFound(Message message) {
+            String messageAsString = new String(message.getContent());
+            Log.d(TAG, "Found message: " + messageAsString);
+        }
+
+        @Override
+        public void onLost(Message message) {
+            String messageAsString = new String(message.getContent());
+            Log.d(TAG, "Lost sight of message: " + messageAsString);
+        }
+    };
 
 
 }

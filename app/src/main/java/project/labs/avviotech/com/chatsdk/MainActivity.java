@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +29,7 @@ import project.labs.avviotech.com.chatsdk.net.protocol.NearByProtocol;
 import project.labs.avviotech.com.chatsdk.wifidirect.WifiDirect;
 
 
-public class MainActivity extends ActionBarActivity implements NearByProtocol.DiscoveryProtocol{
+public class MainActivity extends AppCompatActivity implements NearByProtocol.DiscoveryProtocol{
 
     private NearByUtil nearby;
     private ListView listView;
