@@ -1,5 +1,7 @@
 package project.labs.avviotech.com.chatsdk.net.socket;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -52,6 +54,7 @@ public class TCPClientSocket extends TCPSocket {
 
     @Override
     public void send(String message) {
+        Log.i("ChatSDK","Sending Meesage - " + message);
         synchronized (rawSocketLock) {
             if (out == null) {
                 channelEvent.onError("Sending data on closed socket.");

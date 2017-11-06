@@ -388,7 +388,7 @@ public class NearByUtil implements
                     launchClient.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     activity.startActivity(launchClient);
                 }
-            }, 3000);
+            }, 10);
 
 
         }

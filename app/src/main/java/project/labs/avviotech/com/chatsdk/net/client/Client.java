@@ -3,6 +3,7 @@ package project.labs.avviotech.com.chatsdk.net.client;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 
 import org.webrtc.Camera2Enumerator;
@@ -86,6 +87,7 @@ public class Client implements Params,
         peerHandler = new PeerHandler(peerConnectionClient, this);
         tcpHandler = new TCPHandler(this, peerHandler);
 
+
         setConnectionParameter("", ip + ":8888", loopback);
 
         if (loopback) {
@@ -95,6 +97,7 @@ public class Client implements Params,
         }
         peerConnectionClient.createPeerConnectionFactory(context, localRenderer, remoteRenderer,
                 peerConnectionParameters, tcpHandler);
+
     }
 
     public void setConnectionParameter(String roomUrl, String roomId, boolean loopback) {
