@@ -83,6 +83,7 @@ public class NearByUtil implements
     private static HashMap<String,DeviceModel> clientList;
     private static HashMap<String,DeviceModel> peerList;
     private static boolean isGroupOwner = false;
+    private static boolean isClerk = false;
     public  static NearByProtocol.DiscoveryProtocol delegate;
     public HashMap<String,DeviceModel> getClientList()
     {
@@ -167,7 +168,7 @@ public class NearByUtil implements
                     name,
                     SERVICE_ID,
                     mConnectionLifecycleCallback,
-                    new AdvertisingOptions(Strategy.P2P_STAR))
+                    new AdvertisingOptions(Strategy.P2P_CLUSTER))
                     .setResultCallback(
                             new ResultCallback<Connections.StartAdvertisingResult>() {
                                 @Override
@@ -239,7 +240,7 @@ public class NearByUtil implements
                     mGoogleApiClient,
                     SERVICE_ID,
                     mEndpointDiscoveryCallback,
-                    new DiscoveryOptions(Strategy.P2P_STAR))
+                    new DiscoveryOptions(Strategy.P2P_CLUSTER))
                     .setResultCallback(
                             new ResultCallback<Status>() {
                                 @Override
@@ -281,7 +282,7 @@ public class NearByUtil implements
     public void call(
             final String endpointId) {
         isGroupOwner = true;
-
+        isClerk = true;
         connect(endpointId);
 
 
@@ -355,6 +356,7 @@ public class NearByUtil implements
                             // We're connected! Can now start sending and receiving data.
                             connectedEndpointId = endpointId;
                             Log.i("NearBy", "Connected");
+
                             if(isGroupOwner)
                             {
                                 send(getIPData(Util.getIPAddress(true)).toString());

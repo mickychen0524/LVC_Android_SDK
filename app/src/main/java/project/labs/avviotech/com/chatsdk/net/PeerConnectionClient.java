@@ -74,6 +74,7 @@ public class PeerConnectionClient {
     private static final String MAX_VIDEO_FPS_CONSTRAINT = "maxFrameRate";
     private static final String MIN_VIDEO_FPS_CONSTRAINT = "minFrameRate";
     private static final String DTLS_SRTP_KEY_AGREEMENT_CONSTRAINT = "DtlsSrtpKeyAgreement";
+    private static final String IceRestart = "IceRestart";
     private static final int HD_VIDEO_WIDTH = 1280;
     private static final int HD_VIDEO_HEIGHT = 720;
     private static final int MAX_VIDEO_WIDTH = 1280;
@@ -430,6 +431,7 @@ public class PeerConnectionClient {
             pcConstraints.optional.add(
                     new MediaConstraints.KeyValuePair(DTLS_SRTP_KEY_AGREEMENT_CONSTRAINT, "true"));
         }
+
 
         // Check if there is a camera on device and disable video call if not.
         numberOfCameras = CameraEnumerationAndroid.getDeviceCount();
