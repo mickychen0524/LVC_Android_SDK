@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 import project.labs.avviotech.com.chatsdk.model.Global;
 import project.labs.avviotech.com.chatsdk.model.User;
+import project.labs.avviotech.com.chatsdk.nearby.NearByUtil;
 import project.labs.avviotech.com.chatsdk.net.client.Client;
 import project.labs.avviotech.com.chatsdk.util.Util;
 
@@ -92,6 +94,8 @@ public class CallActivity extends AppCompatActivity {
                 client = new Client(CallActivity.this, intent, ip, remoteRenderer, localRenderer);
             }
 
+            NearByUtil.getInstance().setClient(client);
+
             executor.schedule(new Runnable() {
                 @Override
                 public void run() {
@@ -121,6 +125,7 @@ public class CallActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if(client != null) {
+            Log.i("ChatSDK","Back Pressed");
             client.stopVideo();
             client.disconnect();
         }
@@ -130,6 +135,7 @@ public class CallActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         if(client != null) {
+            Log.i("ChatSDK","onDestroy");
             client.disconnect();
         }
 
@@ -163,7 +169,7 @@ public class CallActivity extends AppCompatActivity {
         end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Log.i("ChatSDK","End clicked");
                 if(client != null)
                     client.disconnect();
 
@@ -205,6 +211,8 @@ public class CallActivity extends AppCompatActivity {
                     } else {
                         client = new Client(CallActivity.this, intent, ip, remoteRenderer, localRenderer);
                     }
+
+                    NearByUtil.getInstance().setClient(client);
 
                     executor.schedule(new Runnable() {
                         @Override

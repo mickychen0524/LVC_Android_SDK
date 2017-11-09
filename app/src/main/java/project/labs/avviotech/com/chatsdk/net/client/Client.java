@@ -26,7 +26,7 @@ import project.labs.avviotech.com.chatsdk.net.handler.ConnectionHandler;
 import project.labs.avviotech.com.chatsdk.net.handler.PeerHandler;
 import project.labs.avviotech.com.chatsdk.net.handler.TCPHandler;
 import project.labs.avviotech.com.chatsdk.util.Util;
-import project.labs.avviotech.com.chatsdk.wifidirect.WifiDirect;
+
 
 
 /**
@@ -164,6 +164,11 @@ public class Client implements Params,
         tcpHandler.requestUserInfo();
     }
 
+    public void onMessageReceived(String message)
+    {
+        tcpHandler.onMessage(message);
+    }
+
     @Override
     public void onConnectPeer() {
         Log.i("ChatSDK", "Peer Connected");
@@ -171,6 +176,10 @@ public class Client implements Params,
 
     @Override
     public void onRequestUserInfo(User user) {
+        if(!NearByUtil.getInstance().isGroupOwner())
+            Global.getInstance().getUser().setIp(NearByUtil.getInstance().serverIp);
+        else
+            Global.getInstance().getUser().setIp(Util.getIPAddress(true));
         tcpHandler.answerUserInfo();
     }
 
@@ -202,12 +211,14 @@ public class Client implements Params,
 
     @Override
     public void onChannelClose() {
+        Log.i("ChatSDK","onChannelClose");
         disconnect();
         //WifiDirect.getInstance().disconnect();
     }
 
     @Override
     public void onChannelError(String description) {
+        Log.i("ChatSDK","onChannelError - " + description);
         disconnect();
     }
 
@@ -223,6 +234,7 @@ public class Client implements Params,
     @Override
     public void onIceDisconnected() {
         iceConnected = false;
+        Log.i("ChatSDK","onIceDisconnected");
         disconnect();
     }
 

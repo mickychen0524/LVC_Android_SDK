@@ -1,9 +1,12 @@
 package project.labs.avviotech.com.chatsdk.net.handler;
 
+import android.util.Log;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.regex.Matcher;
 
+import project.labs.avviotech.com.chatsdk.nearby.NearByUtil;
 import project.labs.avviotech.com.chatsdk.net.socket.TCPClientSocket;
 import project.labs.avviotech.com.chatsdk.net.socket.TCPServerSocket;
 import project.labs.avviotech.com.chatsdk.util.Util;
@@ -22,7 +25,7 @@ public class TCPHandler extends ConnectionHandler {
 
     @Override
     protected void connect() {
-        String endpoint = connectionParameter.getRoomId();
+        /*String endpoint = connectionParameter.getRoomId();
 
         Matcher matcher = Util.IP_PATTERN.matcher(endpoint);
         if (!matcher.matches()) {
@@ -59,8 +62,8 @@ public class TCPHandler extends ConnectionHandler {
             socket = new TCPServerSocket(address, port, this);
         } else {
             socket = new TCPClientSocket(address, port, this);
-        }
-
+        }*/
+        Log.i("TCPHandler","Connect");
         super.connect();
     }
 }

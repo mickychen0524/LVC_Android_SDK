@@ -38,6 +38,10 @@ import com.google.android.gms.nearby.messages.MessageListener;
 import com.google.android.gms.nearby.messages.SubscribeCallback;
 import com.google.android.gms.nearby.messages.SubscribeOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
@@ -48,11 +52,12 @@ import java.util.List;
 import project.labs.avviotech.com.chatsdk.CallActivity;
 import project.labs.avviotech.com.chatsdk.ChatApplication;
 import project.labs.avviotech.com.chatsdk.R;
+import project.labs.avviotech.com.chatsdk.net.client.Client;
 import project.labs.avviotech.com.chatsdk.net.model.DeviceModel;
 import project.labs.avviotech.com.chatsdk.net.protocol.NearByProtocol;
 import project.labs.avviotech.com.chatsdk.net.protocol.WiFiP2PProtocol;
 import project.labs.avviotech.com.chatsdk.util.Util;
-import project.labs.avviotech.com.chatsdk.wifidirect.WifiDirect;
+
 
 /**
  * Created by swayamagrawal on 04/10/17.
@@ -61,6 +66,8 @@ public class NearByUtil implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener
     {
+        private static Client client;
+
     private static MediaPlayer mediaPlayer;
     private static NearByUtil instance;
     private static GoogleApiClient mGoogleApiClient;
@@ -70,7 +77,7 @@ public class NearByUtil implements
     private static String name="";
     private static final String SERVER_IP = "server ip";
     private static final String IS_SERVER = "is_server";
-    private static String serverIp = "";
+    public static String serverIp = "";
 
     private static HashMap<String,DeviceModel> clerkList;
     private static HashMap<String,DeviceModel> clientList;
@@ -92,8 +99,18 @@ public class NearByUtil implements
     private static String type;
     private static Activity activity;
     private static Message mActiveMessage;
+    private static String connectedEndpointId;
+        private static boolean startcallforclient = false;
 
-    public static NearByUtil getInstance()
+        public static Client getClient() {
+            return client;
+        }
+
+        public static void setClient(Client client) {
+            NearByUtil.client = client;
+        }
+
+        public static NearByUtil getInstance()
     {
         if(instance == null)
             instance = new NearByUtil();
@@ -274,10 +291,30 @@ public class NearByUtil implements
         @Override
         public void onPayloadReceived(String s, Payload payload) {
             Log.i("ChatSDK", "onPayloadReceived" + s + " - " + new String(payload.asBytes()));
-            if(!isGroupOwner)
-                serverIp = new String(payload.asBytes());
+            String message = new String(payload.asBytes());
 
-            startCall();
+            try
+            {
+                JSONObject json = new JSONObject(message);
+                String type = json.optString("type");
+
+                if(type.equalsIgnoreCase("ipaddress"))
+                {
+                    serverIp = json.getString("ip");
+                    startCall();
+                }else
+                {
+                    if(client != null)
+                        client.onMessageReceived(message);
+                }
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+
+
+
+
         }
 
         @Override
@@ -295,9 +332,6 @@ public class NearByUtil implements
 
                     if(true)
                     {
-                        //try
-                        //{Thread.sleep(200);}catch (Exception e){e.printStackTrace();}
-
                         new CountDownTimer(100, 1000) { //40000 milli seconds is total time, 1000 milli seconds is time interval
 
                             public void onTick(long millisUntilFinished) {
@@ -309,13 +343,7 @@ public class NearByUtil implements
                         }.start();
 
 
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                Log.i("ChatSDK","Accept Condition");
 
-                            }
-                        },80);
 
                     }
                 }
@@ -325,15 +353,15 @@ public class NearByUtil implements
                     switch (result.getStatus().getStatusCode()) {
                         case ConnectionsStatusCodes.STATUS_OK:
                             // We're connected! Can now start sending and receiving data.
+                            connectedEndpointId = endpointId;
                             Log.i("NearBy", "Connected");
                             if(isGroupOwner)
                             {
-                                Payload p = Payload.fromBytes(Util.getIPAddress(true).getBytes());
-                                Nearby.Connections.sendPayload(mGoogleApiClient, endpointId, p);
-                                Log.i("ChatSDK","Sending Payload with ip address to client from " + type);
-                                if(isGroupOwner)
-                                    startCall();
+                                send(getIPData(Util.getIPAddress(true)).toString());
+                                startCall();
                             }
+
+
 
                             break;
                         case ConnectionsStatusCodes.STATUS_CONNECTION_REJECTED:
@@ -348,7 +376,10 @@ public class NearByUtil implements
                     // We've been disconnected from this endpoint. No more data can be
                     // sent or received.
                     Log.i("NearBy","DisConnected");
-                    delegate.onDisconnect();
+                    connectedEndpointId = null;
+                    disconnect();
+
+
 
                 }
             };
@@ -367,7 +398,8 @@ public class NearByUtil implements
         }
 
 
-        Log.i("ChatSDK", "IP Address - " + ip);
+        Log.i("ChatSDK", "My IP Address - " + ip);
+        Log.i("ChatSDK", "IP Address - " + serverIp);
         Log.i("ChatSDK", "is owner - " + isGroupOwner);
         if(isGroupOwner)
         {
@@ -388,11 +420,46 @@ public class NearByUtil implements
                     launchClient.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     activity.startActivity(launchClient);
                 }
-            }, 10);
+            },30);
 
 
         }
     }
+        public static boolean isGroupOwner() {
+            return isGroupOwner;
+        }
+
+        public static void setIsGroupOwner(boolean isGroupOwner) {
+            NearByUtil.isGroupOwner = isGroupOwner;
+        }
+
+        public static void send(String message)
+    {
+        if(connectedEndpointId !=null && !connectedEndpointId.isEmpty())
+        {
+            Payload p = Payload.fromBytes(message.getBytes());
+            Nearby.Connections.sendPayload(mGoogleApiClient, connectedEndpointId, p);
+        }
+
+
+
+    }
+
+        public static JSONObject getIPData(String ip) {
+            JSONObject json = new JSONObject();
+            jsonPut(json, "ip", ip);
+            jsonPut(json, "type", "ipaddress");
+            return json;
+        }
+
+        private static void jsonPut(JSONObject json, String key, Object value) {
+            try {
+                json.put(key, value);
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
 
     @Override
     public void onConnected(Bundle bundle) {
@@ -469,6 +536,8 @@ public class NearByUtil implements
 
 
     }
+
+
 
 
 

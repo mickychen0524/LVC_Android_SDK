@@ -1,6 +1,11 @@
 package project.labs.avviotech.com.chatsdk.net.handler;
 
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+
+import com.google.android.gms.nearby.Nearby;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,6 +22,7 @@ import java.util.concurrent.Executors;
 
 import project.labs.avviotech.com.chatsdk.model.Global;
 import project.labs.avviotech.com.chatsdk.model.User;
+import project.labs.avviotech.com.chatsdk.nearby.NearByUtil;
 import project.labs.avviotech.com.chatsdk.net.ConnectionParameter;
 import project.labs.avviotech.com.chatsdk.net.PeerConnectionClient;
 import project.labs.avviotech.com.chatsdk.net.protocol.RTCProtocol;
@@ -32,8 +38,8 @@ public abstract class ConnectionHandler
     protected final ExecutorService executor;
     protected ConnectionParameter connectionParameter;
     protected HandleProtocol handleProtocol;
-    protected Socket socket;
-
+    //protected Socket socket;
+    private NearByUtil nearby;
     protected RTCProtocol rtcProtocol;
     protected WiFiP2PProtocol p2pProtocol;
     protected HandleConnection handleConnection;
@@ -49,6 +55,7 @@ public abstract class ConnectionHandler
         this.handleProtocol = handleProtocol;
         this.handleConnection = handleConnection;
         this.signalingParameters = null;
+        nearby = NearByUtil.getInstance();
     }
 
     public void setSignalingParameters(SignalingParameters signalingParameters) {
@@ -57,7 +64,7 @@ public abstract class ConnectionHandler
 
     public void connectToRoom(ConnectionParameter connectionParameter) {
         this.connectionParameter = connectionParameter;
-
+        Log.i("ConnectionHandler","connectToRoom");
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -80,7 +87,7 @@ public abstract class ConnectionHandler
             @Override
             public void run() {
                 JSONObject json = p2pProtocol.getRequestUserInfo(Global.getInstance().getUser());
-                if(json != null) socket.send(json.toString());
+                if(json != null) nearby.send(json.toString());
             }
         });
     }
@@ -90,7 +97,7 @@ public abstract class ConnectionHandler
             @Override
             public void run() {
                 JSONObject json = p2pProtocol.getIncomingData(Global.getInstance().getUser());
-                if(json != null) socket.send(json.toString());
+                if(json != null) nearby.send(json.toString());
             }
         });
     }
@@ -100,22 +107,20 @@ public abstract class ConnectionHandler
             @Override
             public void run() {
                 JSONObject json = p2pProtocol.getAnswerUserInfo(Global.getInstance().getUser());
-                if(json != null) socket.send(json.toString());
+                if(json != null) nearby.send(json.toString());
             }
         });
     }
 
     protected void connect() {
         rtcProtocol.setRoomState(RTCProtocol.ConnectionState.NEW);
-        socket.start();
+        onConnected(nearby.isGroupOwner());
+        //socket.start();
     }
 
     protected void disconnect() {
         rtcProtocol.setRoomState(RTCProtocol.ConnectionState.CLOSED);
-        if(socket != null) {
-            socket.disconnect();
-//            socket = null;
-        }
+
     }
 
     @Override
@@ -173,11 +178,12 @@ public abstract class ConnectionHandler
     }
 
     protected void send(String message) {
-        socket.send(message);
+        nearby.send(message);
     }
 
     @Override
     public void onConnected(boolean isServer) {
+        Log.i("ConnectionHandler","onConnected - " + isServer);
         this.isServer = isServer;
         if (isServer) {
             handleConnection.onConnectTCP();
@@ -244,9 +250,11 @@ public abstract class ConnectionHandler
                 );
                 handleProtocol.onConnectedToRoom(parameters);
             } else {
+                Log.i("ChatSDK" , "Channerl Error - " + message);
                 handleProtocol.onChannelError("JSON parsing error : " + message);
             }
         } catch (JSONException e) {
+            Log.i("ChatSDK" , "Channerl Error - " + message);
             handleProtocol.onChannelError(e.toString());
         }
     }

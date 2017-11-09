@@ -24,6 +24,13 @@ public class WiFiP2PProtocol {
         return json;
     }
 
+    public JSONObject getIPData(String ip) {
+        JSONObject json = new JSONObject();
+        jsonPut(json, "ip", ip);
+        jsonPut(json, "type", "ipaddress");
+        return json;
+    }
+
     public JSONObject getIncomingData(User user) {
         JSONObject json = new JSONObject();
         jsonPut(json, "data","incomingCall");
