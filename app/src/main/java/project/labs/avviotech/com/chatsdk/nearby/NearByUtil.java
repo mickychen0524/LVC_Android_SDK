@@ -71,7 +71,7 @@ public class NearByUtil implements
     private static MediaPlayer mediaPlayer;
     private static NearByUtil instance;
     private static GoogleApiClient mGoogleApiClient;
-    private static String SERVICE_ID = "project.labs.avviotech.com.chatsdk.new";
+    private static String SERVICE_ID = "project.labs.avviotech.com.chatsdk.new.chat";
     private static String CLIENT_SERVICE_ID = "project.labs.avviotech.com.chatsdk.client";
     private static String CLERK_SERVICE_ID = "project.labs.avviotech.com.chatsdk.clerk";
     private static String name="";
@@ -377,6 +377,9 @@ public class NearByUtil implements
                 public void onDisconnected(String endpointId) {
                     // We've been disconnected from this endpoint. No more data can be
                     // sent or received.
+                    peerList.remove(endpointId);
+                    clientList.remove(endpointId);
+                    clerkList.remove(endpointId);
                     Log.i("NearBy","DisConnected");
                     connectedEndpointId = null;
                     disconnect();
