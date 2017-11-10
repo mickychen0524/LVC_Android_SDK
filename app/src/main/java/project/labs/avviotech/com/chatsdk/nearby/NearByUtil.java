@@ -99,6 +99,7 @@ public class NearByUtil implements
     }
     private static String type;
     private static Activity activity;
+        public static boolean isInit = false;
     private static Message mActiveMessage;
     private static String connectedEndpointId;
         private static boolean startcallforclient = false;
@@ -143,7 +144,7 @@ public class NearByUtil implements
         clerkList = new HashMap<>();
         clientList = new HashMap<>();
         peerList = new HashMap<>();
-
+        isInit = true;
 
 
     }
@@ -272,25 +273,23 @@ public class NearByUtil implements
             final String endpointId) {
         clientList.remove(endpointId);
         delegate.onPeersFound(peerList);
-        if(mGoogleApiClient.isConnected())
-        {
-            Nearby.Connections.requestConnection(
-                    mGoogleApiClient,
-                    name,
-                    endpointId,
-                    mConnectionLifecycleCallback)
-                    .setResultCallback(
-                            new ResultCallback<Status>() {
-                                @Override
-                                public void onResult(@NonNull Status status) {
-                                    if (status.isSuccess()) {
-                                        Log.i("NearBy","requestConnection");
-                                    } else {
-                                        Log.i("NearBy","requestConnection failed");
-                                    }
+        Nearby.Connections.requestConnection(
+                mGoogleApiClient,
+                name,
+                endpointId,
+                mConnectionLifecycleCallback)
+                .setResultCallback(
+                        new ResultCallback<Status>() {
+                            @Override
+                            public void onResult(@NonNull Status status) {
+                                if (status.isSuccess()) {
+                                    Log.i("NearBy","requestConnection");
+                                } else {
+                                    Log.i("NearBy","requestConnection failed");
                                 }
-                            });
-        }
+                            }
+                        });
+
 
     }
 
