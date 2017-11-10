@@ -119,6 +119,10 @@ public class NearByUtil implements
         return  instance;
     }
 
+    public static GoogleApiClient getGoogleClient()
+    {
+        return mGoogleApiClient;
+    }
     private static String TAG = "NearBy";
     public static void setActivity(Activity a)
     {
@@ -268,22 +272,26 @@ public class NearByUtil implements
             final String endpointId) {
         clientList.remove(endpointId);
         delegate.onPeersFound(peerList);
-        Nearby.Connections.requestConnection(
-                mGoogleApiClient,
-                name,
-                endpointId,
-                mConnectionLifecycleCallback)
-                .setResultCallback(
-                        new ResultCallback<Status>() {
-                            @Override
-                            public void onResult(@NonNull Status status) {
-                                if (status.isSuccess()) {
-                                    Log.i("NearBy","requestConnection");
-                                } else {
-                                    Log.i("NearBy","requestConnection failed");
+        if(mGoogleApiClient.isConnected())
+        {
+            Nearby.Connections.requestConnection(
+                    mGoogleApiClient,
+                    name,
+                    endpointId,
+                    mConnectionLifecycleCallback)
+                    .setResultCallback(
+                            new ResultCallback<Status>() {
+                                @Override
+                                public void onResult(@NonNull Status status) {
+                                    if (status.isSuccess()) {
+                                        Log.i("NearBy","requestConnection");
+                                    } else {
+                                        Log.i("NearBy","requestConnection failed");
+                                    }
                                 }
-                            }
-                        });
+                            });
+        }
+
     }
 
     public void call(
