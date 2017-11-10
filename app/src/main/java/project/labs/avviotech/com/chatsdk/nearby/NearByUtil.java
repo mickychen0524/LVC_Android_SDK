@@ -234,6 +234,7 @@ public class NearByUtil implements
             };
 
     public static void startDiscovery() {
+        Log.i("NearBy","startDiscovery");
         if(mGoogleApiClient.isConnected())
         {
             Nearby.Connections.startDiscovery(
@@ -253,6 +254,10 @@ public class NearByUtil implements
                                     }
                                 }
                             });
+        }
+        else
+        {
+            Log.i("NearBy","Google client not connected ");
         }
 
     }
@@ -469,11 +474,16 @@ public class NearByUtil implements
     @Override
     public void onConnected(Bundle bundle) {
         Log.i("ChatSDK","google app client started");
-        Nearby.Connections.stopAllEndpoints(mGoogleApiClient);
-        startDiscovery();
+        //Nearby.Connections.stopAllEndpoints(mGoogleApiClient);
+
         if("clerk".equalsIgnoreCase(type))
         {
             startAdvertising();
+            startDiscovery();
+        }
+        else
+        {
+            startDiscovery();
         }
 
         //publish(name);
