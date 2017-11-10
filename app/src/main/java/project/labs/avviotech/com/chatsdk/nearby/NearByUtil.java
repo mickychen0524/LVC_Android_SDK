@@ -178,6 +178,8 @@ public class NearByUtil implements
                                     } else {
                                         Log.i("NearBy", "Device Advertising failed ");
                                     }
+                                    if(type.equalsIgnoreCase("clerk"))
+                                        startDiscovery();
                                 }
                             });
         }
@@ -479,7 +481,6 @@ public class NearByUtil implements
         if("clerk".equalsIgnoreCase(type))
         {
             startAdvertising();
-            startDiscovery();
         }
         else
         {
