@@ -3,7 +3,9 @@ package project.labs.avviotech.com.chatsdk.net.client;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import org.webrtc.Camera2Enumerator;
@@ -129,7 +131,7 @@ public class Client implements Params,
         try
         {
             ((Activity)context).finish();
-            NearByUtil.getInstance().disconnect();
+            NearByUtil.getStaticInternalInstance().disconnect();
 
         }catch(Exception e)
         {
@@ -176,8 +178,8 @@ public class Client implements Params,
 
     @Override
     public void onRequestUserInfo(User user) {
-        if(!NearByUtil.getInstance().isGroupOwner())
-            Global.getInstance().getUser().setIp(NearByUtil.getInstance().serverIp);
+        if(!NearByUtil.getStaticInternalInstance().isGroupOwner())
+            Global.getInstance().getUser().setIp(NearByUtil.getStaticInternalInstance().serverIp);
         else
             Global.getInstance().getUser().setIp(Util.getIPAddress(true));
         tcpHandler.answerUserInfo();

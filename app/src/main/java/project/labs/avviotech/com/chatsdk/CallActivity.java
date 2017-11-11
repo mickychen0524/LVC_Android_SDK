@@ -3,6 +3,7 @@ package project.labs.avviotech.com.chatsdk;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -94,7 +95,7 @@ public class CallActivity extends AppCompatActivity {
                 client = new Client(CallActivity.this, intent, ip, remoteRenderer, localRenderer);
             }
 
-            NearByUtil.getInstance().setClient(client);
+            NearByUtil.getStaticInternalInstance().setClient(client);
 
             executor.schedule(new Runnable() {
                 @Override
@@ -212,7 +213,7 @@ public class CallActivity extends AppCompatActivity {
                         client = new Client(CallActivity.this, intent, ip, remoteRenderer, localRenderer);
                     }
 
-                    NearByUtil.getInstance().setClient(client);
+                    NearByUtil.getStaticInternalInstance().setClient(client);
 
                     executor.schedule(new Runnable() {
                         @Override

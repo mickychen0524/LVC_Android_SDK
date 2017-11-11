@@ -64,9 +64,8 @@ import project.labs.avviotech.com.chatsdk.util.Util;
  */
 public class NearByUtil implements
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener
-    {
-        private static Client client;
+        GoogleApiClient.OnConnectionFailedListener {
+    private static Client client;
 
     private static MediaPlayer mediaPlayer;
     private static NearByUtil instance;
@@ -74,73 +73,84 @@ public class NearByUtil implements
     private static String SERVICE_ID = "project.labs.avviotech.com.chatsdk.new.chat";
     private static String CLIENT_SERVICE_ID = "project.labs.avviotech.com.chatsdk.client";
     private static String CLERK_SERVICE_ID = "project.labs.avviotech.com.chatsdk.clerk";
-    private static String name="";
+    private static String name = "";
     private static final String SERVER_IP = "server ip";
     private static final String IS_SERVER = "is_server";
     public static String serverIp = "";
 
-    private static HashMap<String,DeviceModel> clerkList;
-    private static HashMap<String,DeviceModel> clientList;
-    private static HashMap<String,DeviceModel> peerList;
+    private static HashMap<String, DeviceModel> clerkList;
+    private static HashMap<String, DeviceModel> clientList;
+    private static HashMap<String, DeviceModel> peerList;
     private static boolean isGroupOwner = false;
     private static boolean isClerk = false;
-    public  static NearByProtocol.DiscoveryProtocol delegate;
-    public HashMap<String,DeviceModel> getClientList()
-    {
+    public static NearByProtocol.DiscoveryProtocol delegate;
+
+    public HashMap<String, DeviceModel> getClientList() {
         return clientList;
     }
-    public HashMap<String,DeviceModel> getClerkList()
-    {
+
+    public HashMap<String, DeviceModel> getClerkList() {
         return clerkList;
     }
-    public HashMap<String,DeviceModel> getPeerList()
-    {
+
+    public HashMap<String, DeviceModel> getPeerList() {
         return peerList;
     }
+
     private static String type;
     private static Activity activity;
-        public static boolean isInit = false;
+    public static boolean isInit = false;
     private static Message mActiveMessage;
     private static String connectedEndpointId;
-        private static boolean startcallforclient = false;
+    private static boolean startcallforclient = false;
 
-        public static Client getClient() {
-            return client;
-        }
-
-        public static void setClient(Client client) {
-            NearByUtil.client = client;
-        }
-
-        public static NearByUtil getInstance()
-    {
-        if(instance == null)
-            instance = new NearByUtil();
-
-        return  instance;
+    public static Client getClient() {
+        return client;
     }
 
-    public static GoogleApiClient getGoogleClient()
-    {
+    public static void setClient(Client client) {
+        NearByUtil.client = client;
+    }
+
+    public static NearByUtil getInstance(AppCompatActivity activity, String n, String t) {
+        if (instance == null) {
+            Log.i("ChatSDK","Near Ny Util Instance is init ");
+            instance = new NearByUtil();
+            instance.init(activity,n,t);
+        }
+        Log.i("ChatSDK","Near Ny Util Instance is Not Null ");
+        return instance;
+    }
+
+    public static NearByUtil getStaticInternalInstance() {
+        if(instance == null)
+            Log.i("ChatSDK","Near Ny Util Instance is null ");
+
+        return instance;
+    }
+
+    public static GoogleApiClient getGoogleClient() {
         return mGoogleApiClient;
     }
+
     private static String TAG = "NearBy";
-    public static void setActivity(Activity a)
-    {
+
+    public static void setActivity(Activity a) {
         activity = a;
     }
 
-    public void init(AppCompatActivity activity, String n, String t)
-    {
+    public void init(AppCompatActivity activity, String n, String t) {
+        Log.i("ChatSDK","Init Called");
         name = n;
         type = t;
         name = type + "-" + name;
         mGoogleApiClient = new GoogleApiClient.Builder(activity)
                 .addApi(Nearby.CONNECTIONS_API)
                 .addConnectionCallbacks(this)
-                .enableAutoManage(activity,this)
+                .enableAutoManage(activity, this)
                 .build();
 
+        mGoogleApiClient.connect();
         clerkList = new HashMap<>();
         clientList = new HashMap<>();
         peerList = new HashMap<>();
@@ -150,24 +160,19 @@ public class NearByUtil implements
     }
 
 
-    public static void start()
-    {
-        mGoogleApiClient.connect();
+    public static void start() {
+        if(!mGoogleApiClient.isConnected())
+            mGoogleApiClient.connect();
     }
 
-    public static void stop()
-    {
-        Log.i("ChatSDK","Google client Stopped");
-        //unpublish();
-        //unsubscribe();
-        mGoogleApiClient.disconnect();
+    public static void stop() {
+        Log.i("ChatSDK", "Google client Stopped");
+       mGoogleApiClient.disconnect();
 
     }
 
-    public static void startAdvertising()
-    {
-        if(mGoogleApiClient.isConnected())
-        {
+    public static void startAdvertising() {
+        if (mGoogleApiClient.isConnected()) {
             Nearby.Connections.startAdvertising(
                     mGoogleApiClient,
                     name,
@@ -183,7 +188,7 @@ public class NearByUtil implements
                                     } else {
                                         Log.i("NearBy", "Device Advertising failed ");
                                     }
-                                    if(type.equalsIgnoreCase("clerk"))
+                                    if (type.equalsIgnoreCase("clerk"))
                                         startDiscovery();
                                 }
                             });
@@ -191,18 +196,17 @@ public class NearByUtil implements
 
     }
 
-    public static void stopAdvertising()
-    {
-        if(mGoogleApiClient.isConnected()) {
-            Log.i("ChatSDK","Advertising Stopped");
+    public static void stopAdvertising() {
+        if (mGoogleApiClient.isConnected()) {
+            Log.i("ChatSDK", "Advertising Stopped");
             Nearby.Connections.stopAdvertising(
                     mGoogleApiClient);
         }
     }
-    public static void stopDiscovery()
-    {
-        if(mGoogleApiClient.isConnected()) {
-            Log.i("ChatSDK","Discovery Stopped");
+
+    public static void stopDiscovery() {
+        if (mGoogleApiClient.isConnected()) {
+            Log.i("ChatSDK", "Discovery Stopped");
             Nearby.Connections.stopDiscovery(
                     mGoogleApiClient);
         }
@@ -220,12 +224,13 @@ public class NearByUtil implements
                     model.setAddress(endpointId);
                     peerList.put(endpointId, model);
 
-                    if(!isClient(discoveredEndpointInfo.getEndpointName()))
+                    if (!isClient(discoveredEndpointInfo.getEndpointName()))
                         clerkList.put(endpointId, model);
                     else
                         clientList.put(endpointId, model);
 
-                    delegate.onPeersFound(peerList);
+                    if(delegate != null)
+                        delegate.onPeersFound(peerList);
 
                 }
 
@@ -236,14 +241,14 @@ public class NearByUtil implements
                     clientList.remove(endpointId);
                     peerList.remove(endpointId);
 
-                    delegate.onPeersFound(peerList);
+                    if(delegate != null)
+                        delegate.onPeersFound(peerList);
                 }
             };
 
     public static void startDiscovery() {
-        Log.i("NearBy","startDiscovery");
-        if(mGoogleApiClient.isConnected())
-        {
+        Log.i("NearBy", "startDiscovery");
+        if (mGoogleApiClient.isConnected()) {
             Nearby.Connections.startDiscovery(
                     mGoogleApiClient,
                     SERVICE_ID,
@@ -254,17 +259,15 @@ public class NearByUtil implements
                                 @Override
                                 public void onResult(@NonNull Status status) {
                                     if (status.isSuccess()) {
-                                        Log.i("NearBy","Device Discovery Successful  - " + status.getStatusMessage());
+                                        Log.i("NearBy", "Device Discovery Successful  - " + status.getStatusMessage());
                                     } else {
                                         // We were unable to start discovering.
-                                        Log.i("NearBy","Device Discovery Failed  - " + status.getStatusMessage());
+                                        Log.i("NearBy", "Device Discovery Failed  - " + status.getStatusMessage());
                                     }
                                 }
                             });
-        }
-        else
-        {
-            Log.i("NearBy","Google client not connected ");
+        } else {
+            Log.i("NearBy", "Google client not connected ");
         }
 
     }
@@ -272,7 +275,8 @@ public class NearByUtil implements
     public void connect(
             final String endpointId) {
         clientList.remove(endpointId);
-        delegate.onPeersFound(peerList);
+        if(delegate != null)
+            delegate.onPeersFound(peerList);
         Nearby.Connections.requestConnection(
                 mGoogleApiClient,
                 name,
@@ -283,9 +287,9 @@ public class NearByUtil implements
                             @Override
                             public void onResult(@NonNull Status status) {
                                 if (status.isSuccess()) {
-                                    Log.i("NearBy","requestConnection");
+                                    Log.i("NearBy", "requestConnection");
                                 } else {
-                                    Log.i("NearBy","requestConnection failed");
+                                    Log.i("NearBy", "requestConnection failed");
                                 }
                             }
                         });
@@ -308,26 +312,20 @@ public class NearByUtil implements
             Log.i("ChatSDK", "onPayloadReceived" + s + " - " + new String(payload.asBytes()));
             String message = new String(payload.asBytes());
 
-            try
-            {
+            try {
                 JSONObject json = new JSONObject(message);
                 String type = json.optString("type");
 
-                if(type.equalsIgnoreCase("ipaddress"))
-                {
+                if (type.equalsIgnoreCase("ipaddress")) {
                     serverIp = json.getString("ip");
                     startCall();
-                }else
-                {
-                    if(client != null)
+                } else {
+                    if (client != null)
                         client.onMessageReceived(message);
                 }
-            }catch(Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
 
 
         }
@@ -345,19 +343,17 @@ public class NearByUtil implements
                         final String endpointId, ConnectionInfo connectionInfo) {
                     // Automatically accept the connection on both sides.
 
-                    if(true)
-                    {
+                    if (true) {
                         new CountDownTimer(100, 1000) { //40000 milli seconds is total time, 1000 milli seconds is time interval
 
                             public void onTick(long millisUntilFinished) {
                             }
+
                             public void onFinish() {
                                 Nearby.Connections.acceptConnection(
                                         mGoogleApiClient, endpointId, mPayloadCallback);
                             }
                         }.start();
-
-
 
 
                     }
@@ -371,18 +367,16 @@ public class NearByUtil implements
                             connectedEndpointId = endpointId;
                             Log.i("NearBy", "Connected");
 
-                            if(isGroupOwner)
-                            {
+                            if (isGroupOwner) {
                                 send(getIPData(Util.getIPAddress(true)).toString());
                                 startCall();
                             }
 
 
-
                             break;
                         case ConnectionsStatusCodes.STATUS_CONNECTION_REJECTED:
                             // The connection was rejected by one or both sides.
-                            Log.i("NearBy","Rejected");
+                            Log.i("NearBy", "Rejected");
                             break;
                     }
                 }
@@ -394,24 +388,22 @@ public class NearByUtil implements
                     peerList.remove(endpointId);
                     clientList.remove(endpointId);
                     clerkList.remove(endpointId);
-                    Log.i("NearBy","DisConnected");
+                    Log.i("NearBy", "DisConnected");
                     connectedEndpointId = null;
                     disconnect();
-
 
 
                 }
             };
 
 
-    public static void startCall()
-    {
+    public static void startCall() {
         boolean isserer = false;
         String ip = Util.getIPAddress(true);
         InetAddress address;
         try {
             address = InetAddress.getByName(ip);
-            if(address.isAnyLocalAddress())
+            if (address.isAnyLocalAddress())
                 isserer = true;
         } catch (UnknownHostException e) {
         }
@@ -420,16 +412,14 @@ public class NearByUtil implements
         Log.i("ChatSDK", "My IP Address - " + ip);
         Log.i("ChatSDK", "IP Address - " + serverIp);
         Log.i("ChatSDK", "is owner - " + isGroupOwner);
-        if(isGroupOwner)
-        {
+        if (isGroupOwner) {
             stopSound();
             Intent launchServer = new Intent(activity, CallActivity.class);
             launchServer.putExtra(SERVER_IP, ip);
             launchServer.putExtra(IS_SERVER, true);
             launchServer.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             activity.startActivity(launchServer);
-        }else
-        {
+        } else {
             stopSound();
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -439,58 +429,53 @@ public class NearByUtil implements
                     launchClient.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     activity.startActivity(launchClient);
                 }
-            },30);
+            }, 30);
 
 
         }
     }
-        public static boolean isGroupOwner() {
-            return isGroupOwner;
-        }
 
-        public static void setIsGroupOwner(boolean isGroupOwner) {
-            NearByUtil.isGroupOwner = isGroupOwner;
-        }
+    public static boolean isGroupOwner() {
+        return isGroupOwner;
+    }
 
-        public static void send(String message)
-    {
-        if(connectedEndpointId !=null && !connectedEndpointId.isEmpty())
-        {
+    public static void setIsGroupOwner(boolean isGroupOwner) {
+        NearByUtil.isGroupOwner = isGroupOwner;
+    }
+
+    public static void send(String message) {
+        if (connectedEndpointId != null && !connectedEndpointId.isEmpty()) {
             Payload p = Payload.fromBytes(message.getBytes());
             Nearby.Connections.sendPayload(mGoogleApiClient, connectedEndpointId, p);
         }
 
 
-
     }
 
-        public static JSONObject getIPData(String ip) {
-            JSONObject json = new JSONObject();
-            jsonPut(json, "ip", ip);
-            jsonPut(json, "type", "ipaddress");
-            return json;
-        }
+    public static JSONObject getIPData(String ip) {
+        JSONObject json = new JSONObject();
+        jsonPut(json, "ip", ip);
+        jsonPut(json, "type", "ipaddress");
+        return json;
+    }
 
-        private static void jsonPut(JSONObject json, String key, Object value) {
-            try {
-                json.put(key, value);
-            } catch (JSONException e) {
-                throw new RuntimeException(e);
-            }
+    private static void jsonPut(JSONObject json, String key, Object value) {
+        try {
+            json.put(key, value);
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
         }
+    }
 
 
     @Override
     public void onConnected(Bundle bundle) {
-        Log.i("ChatSDK","google app client started");
+        Log.i("ChatSDK", "google app client started");
         //Nearby.Connections.stopAllEndpoints(mGoogleApiClient);
 
-        if("clerk".equalsIgnoreCase(type))
-        {
+        if ("clerk".equalsIgnoreCase(type)) {
             startAdvertising();
-        }
-        else
-        {
+        } else {
             startDiscovery();
         }
 
@@ -502,67 +487,57 @@ public class NearByUtil implements
 
     @Override
     public void onConnectionSuspended(int i) {
-        Log.i("ChatSDK","Google Client onConnectionSuspended");
+        Log.i("ChatSDK", "Google Client onConnectionSuspended");
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-        Log.i("ChatSDK","Google Client onConnectionFailed");
+        Log.i("ChatSDK", "Google Client onConnectionFailed");
     }
 
-    public static boolean isClient(String name)
-    {
-        if(name.indexOf("client") != -1)
+    public static boolean isClient(String name) {
+        if (name.indexOf("client") != -1)
             return true;
 
         return false;
     }
 
-    public static void disconnect()
-    {
+    public static void disconnect() {
         Nearby.Connections.stopAllEndpoints(mGoogleApiClient);
         startDiscovery();
-        if("client".equalsIgnoreCase(type)){
+        if ("client".equalsIgnoreCase(type)) {
             stopAdvertising();
-        }
-        else if("clerk".equalsIgnoreCase(type)){
+        } else if ("clerk".equalsIgnoreCase(type)) {
             startAdvertising();
         }
 
-        delegate.onDisconnect();
+        if(delegate != null)
+            delegate.onDisconnect();
     }
 
-    public static String getFilterName(String n)
-    {
-        if(n.indexOf("-") != -1)
+    public static String getFilterName(String n) {
+        if (n.indexOf("-") != -1)
             return n.substring(n.indexOf("-") + 1);
 
         return "";
     }
 
-    public static void playSound()
-    {
-        if(mediaPlayer == null)
-        {
+    public static void playSound() {
+        if (mediaPlayer == null) {
             mediaPlayer = MediaPlayer.create(activity, R.raw.ringtone);
             mediaPlayer.setLooping(true);
         }
 
         mediaPlayer.start();
     }
-    public static void stopSound()
-    {
-        if(mediaPlayer != null && mediaPlayer.isPlaying())
-        {
+
+    public static void stopSound() {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
         }
 
 
     }
-
-
-
-
 
 
 }

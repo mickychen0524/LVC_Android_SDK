@@ -55,7 +55,7 @@ public abstract class ConnectionHandler
         this.handleProtocol = handleProtocol;
         this.handleConnection = handleConnection;
         this.signalingParameters = null;
-        nearby = NearByUtil.getInstance();
+        nearby = NearByUtil.getStaticInternalInstance();
     }
 
     public void setSignalingParameters(SignalingParameters signalingParameters) {
